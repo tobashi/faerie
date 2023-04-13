@@ -47,6 +47,7 @@ impl From<Architecture> for MachineTag {
             X86_32(_) => EM_386,
             Aarch64(_) => EM_AARCH64,
             Arm(_) => EM_ARM,
+            Bpfel | Bpfeb => EM_BPF,
             Mips32(_) | Mips64(_) => EM_MIPS,
             Powerpc => EM_PPC,
             Powerpc64 | Powerpc64le => EM_PPC64,
