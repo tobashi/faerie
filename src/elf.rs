@@ -510,11 +510,15 @@ impl<'a> Elf<'a> {
             (Data::ZeroInit(_), DefinedDecl::Function(_)) => {
                 unreachable!("cannot define function as zero-init")
             }
-            (Data::Blob(_), DefinedDecl::Data(decl)) => format!(
-                ".{}.{}",
-                if decl.is_writable() { "data" } else { "rodata" },
-                name
-            ),
+            (Data::Blob(_), DefinedDecl::Data(decl)) => 
+            if name == "maps" { name.to_owned() }
+            else { 
+                format!(
+                    ".{}.{}",
+                    if decl.is_writable() { "data" } else { "rodata" },
+                    name
+                )
+            },
             (Data::ZeroInit(_), DefinedDecl::Data(_)) => format!(".bss.{}", name),
             (_, DefinedDecl::Section(_)) => name.to_owned(),
         };
